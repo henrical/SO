@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define CICLES_NUM 5120
+#define CICLES_NUM 1024
 
 #define STRINGS_NUM 10
 #define FILES_NUM 5
@@ -27,7 +27,7 @@ int random_number(int min, int max)
 
 int main()
 {
-	int i = 0;
+	int i = 0, e = 0;
 	
 	char charSequencesArray[STRINGS_NUM][STRING_SIZE] = {"aaaaaaaaa\n", "bbbbbbbbb\n", "ccccccccc\n", "ddddddddd\n", "eeeeeeeee\n", "fffffffff\n", "ggggggggg\n", "hhhhhhhhh\n", "iiiiiiiii\n", "jjjjjjjjj\n"};
 
@@ -39,25 +39,29 @@ int main()
 	int arrayNum; 
 	int fileNum;
 	
-	arrayNum = random_number(0,9); //random char sequence - escolhe uma das posiçoes do array aleatoriamente
-	fileNum = random_number(0,4); //random file name - escolhe uma das posiçoes do array aleatoriamente
+	while(e<5120)
+	{
+		arrayNum = random_number(0,9); //random char sequence - escolhe uma das posiçoes do array aleatoriamente
+		fileNum = random_number(0,4); //random file name - escolhe uma das posiçoes do array aleatoriamente
+
+		pFile = fopen( fileNameArray[fileNum], "w");
 	
+		if(pFile) //testa se realmente abriu/criou ficheiro
+	  	  do{
+			fprintf(pFile, charSequencesArray[arrayNum]);
+			i++;	
+	   	  }while(i < CICLES_NUM-1);	
 
-	pFile = fopen( fileNameArray[fileNum], "w");
-	
-	if(pFile) //testa se realmente abriu/criou ficheiro
-	  do{
-		fprintf(pFile, charSequencesArray[arrayNum]);
-		i++;	
-	  }while(i < CICLES_NUM);	
+		else 
+	  	{
+			printf("Error handling file\n");
+			return EXIT_FAILURE;
+	  	}
 
-	else 
-	  {
-		printf("Error handling file\n");
-		return EXIT_FAILURE;
-	  }
-
-	fclose(pFile);
+		i = 0;
+		e++;
+		fclose(pFile);
+	} // while(e<5120)
 
 	return EXIT_SUCCESS;
 }
