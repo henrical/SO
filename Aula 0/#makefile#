@@ -1,0 +1,7 @@
+main: list.o main.oain.o
+
+list.o: list.c list.h
+	gcc -g -c list.c
+
+main.o :main.c list.h
+	gcc -g -c main.c
