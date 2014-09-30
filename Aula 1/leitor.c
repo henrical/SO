@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 
 #define FILES_NUM 5
 #define STRING_SIZE 16
+
+#define TRUE 0
+#define FALSE -1
 
 #define EOL '\n'
 
@@ -55,7 +59,7 @@ char *readFile(char *fileName)
 	else
 	{
 		printf("Error handling file\n");
-		assert(1);
+		assert(1); //the program stops
 	}
 
 
@@ -75,21 +79,52 @@ int main()
 	char *buffer;	
 	char letter;
 
+	char *fileName; 
+	fileName = fileNameArray[random_number(0,4)];
+
 
 	//le todo o ficheiro e coloca o conteudo no buffer
-	buffer = readFile(fileNameArray[random_number(0,4)]);
+	buffer = readFile(fileName);
+
+	
+	//printf("ficheiro escolhido: %s\n", fileName);
 
 	
 	//guarda a letra que e repetida
 	letter = buffer[0];
 
-	while(i<=1024) 
+	while(i<=10240) 
 	{
+		if(i%10==0)
+		{
+			if(buffer[i-1]!= EOL) 
+			{
+				/*printf("%d\n", i);				
+				printf("failure, barra-n error\n");*/
 				
+				return FALSE; 
+				
+			}
+		}
+
+		else
+		{
+			if(buffer[i-1]!= letter)
+			{
+				 /*printf("%d\n", i);
+				 printf("failure, letter error\n");*/
+
+				 return FALSE;
+				 
+			}
+		}
+					
 		i++;
 	}
 
-	return 0;
+	printf("sucesso\nlidos %d caracteres\n", i-1); 
+
+	return TRUE;
 
 }
 
