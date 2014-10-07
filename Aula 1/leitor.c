@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <string.h>
 
 #define FILES_NUM 5
 #define STRING_SIZE 16
@@ -95,7 +94,7 @@ int main()
 
 	while(i<=10240) 
 	{
-		if(i%10==0)
+		if(i%10==0) //nas posiçoes divisiveis por 10 tem de estar um barra n
 		{
 			if(buffer[i-1]!= EOL) 
 			{
@@ -109,7 +108,7 @@ int main()
 
 		else
 		{
-			if(buffer[i-1]!= letter)
+			if(buffer[i-1]!= letter) //verifica se a letra lida é a esperada
 			{
 				 /*printf("%d\n", i);
 				 printf("failure, letter error\n");*/
