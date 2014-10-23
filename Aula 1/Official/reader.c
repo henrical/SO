@@ -73,7 +73,13 @@ int ReadFromFile(){
     else
       return 0;
   }
+    
       
-  else return -1;
+  else
+  {
+    free(buffer);
+    free(match);
+    return -1;
+  } 
   
 }
