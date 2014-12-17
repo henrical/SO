@@ -1,0 +1,19 @@
+all: ESCRITOR LEITOR MONITOR
+
+ESCRITOR: ESCRITOR.o 
+	gcc -pthread -o ESCRITOR ESCRITOR.o
+
+ESCRITOR.o: ESCRITOR.c
+	gcc -pthread -g -c ESCRITOR.c
+
+LEITOR: LEITOR.o
+	gcc -pthread -o LEITOR LEITOR.o
+
+LEITOR.o: LEITOR.c
+	gcc -pthread -g -c LEITOR.c
+
+MONITOR: MONITOR.o
+	gcc -o MONITOR MONITOR.o
+
+MONITOR.o: MONITOR.c
+	gcc -g -c MONITOR.c
